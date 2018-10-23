@@ -33,7 +33,7 @@ def grid_system_generator(current_zones):
     # Store the coordinates for each square
     for m in range(south_north_dist+1): 
         for n in range(west_east_dist+1):
-            node_list[(m,n)]=(west[1]+west_east*n,south[0]+south_north*m)
+            node_list[(m,n)]=(south[0]+south_north*m,west[1]+west_east*n)
     for i in range(south_north_dist): #110
         for j in range(west_east_dist):
             draw_node_list=Polygon([node_list[(i,j)],node_list[(i+1,j)],node_list[(i+1,j+1)],node_list[(i,j+1)],
