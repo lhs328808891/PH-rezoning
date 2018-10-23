@@ -8,7 +8,9 @@ import pandas as pd
 
 from fastkml import kml
 
-def kml_to_polygon(doc):
+def kml_to_polygon(kml_file):
+    with open(kml_file, 'rt',encoding="utf-8") as myfile:
+        doc=myfile.read().encode('utf-8')
     k=kml.KML()
     k.from_string(doc)
     features = list(k.features())
