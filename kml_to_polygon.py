@@ -7,6 +7,7 @@ Created on Mon Oct 22 20:21:41 2018
 import pandas as pd
 
 from fastkml import kml
+from shapely.geometry import Polygon 
 
 def kml_to_polygon(kml_file):
     with open(kml_file, 'rt',encoding="utf-8") as myfile:
@@ -18,7 +19,10 @@ def kml_to_polygon(kml_file):
     polygon_df = pd.DataFrame(columns=['name','polygon'])
     for shape in listofeatures:
         try:
-            polygon_df=polygon_df.append({'name':shape.name,'polygon':shape.geometry},ignore_index=True)
+            if 'Polygon' in str(type(shape.geometry)):
+                polygon_df=polygon_df.append({'name':shape.name,'polygon':shape.geometry},ignore_index=True)
+            else:
+                polygon_df=polygon_df.append({'name':shape.name,'polygon':Polygon(shape.geometry)},ignore_index=True)
         except:
             pass
     return polygon_df
